@@ -1,0 +1,153 @@
+@mixin shrinkLabel {
+  top: -4px;
+  font-size: 18px;
+
+  color: var(--gray);
+}
+
+.container {
+  margin: 20vh auto;
+  width: 80vw;
+  height: 60vh;
+  background-color: rgba(255, 255, 255, 0.562);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius);
+
+  .header {
+    color: var(--gray);
+  }
+
+  .form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .group {
+      position: relative;
+      width: 80%;
+    }
+
+    .form_input {
+      position: relative;
+      background: none;
+      background-color: rgba(255, 255, 255, 0.777);
+      color: var(--gray);
+      font-size: 1.2rem;
+      padding: 10px 10px 10px 5px;
+      display: block;
+      width: 100%;
+      border: none;
+      border-radius: var(--border-radius);
+      border-bottom: 1px solid var(--gray);
+      margin: 1.5rem 0;
+
+      &.error_line {
+        border-bottom: 2px solid var(--red);
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      &:focus ~ .form_input_label {
+        @include shrinkLabel();
+      }
+    }
+
+    .form_input:-webkit-autofill,
+    form_input:-webkit-autofill:hover,
+    form_input:-webkit-autofill:focus,
+    form_input:-webkit-autofill:active {
+      box-shadow: 0 0 0 30px var(--white) inset;
+    }
+
+    .form_input_label {
+      color: var(--gray);
+      font-size: 1.2rem;
+      font-weight: normal;
+      position: absolute;
+      pointer-events: none;
+      left: 7px;
+      top: 2rem;
+      transition: 300ms ease all;
+
+      &.shrink {
+        @include shrinkLabel();
+      }
+    }
+
+    .btn_icon {
+      background-color: transparent;
+      border: none;
+      position: absolute;
+      right: -10px;
+      top: 30px;
+      cursor: pointer;
+      transition: all 0.6s;
+
+      .icon {
+        height: 24px;
+        width: 24px;
+        transition: all 0.3s;
+
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+    }
+
+    .btn-submit {
+      background-color: #ecd344c8;
+      border: none;
+      border-radius: var(--border-radius);
+      padding: 15px 40px;
+      text-align: center;
+      text-justify: center;
+      color: #19292b;
+      transition: all 0.3s;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.1);
+        background-color: #ecd344;
+      }
+    }
+
+    .passwordStrength {
+      width: 100%;
+      height: 10px;
+      margin: 20px 0;
+      display: flex;
+      gap: 2px;
+      justify-content: center;
+
+      span {
+        position: relative;
+        height: 100%;
+        width: 30%;
+        background: lightgrey;
+        border-radius: 5px;
+        background-color: rgb(76, 76, 76);
+      }
+      //   .poor {
+      //     background-color: #ff4757;
+      //   }
+      //   .weak {
+      //     background-color: orange;
+      //   }
+      //   .strong {
+      //     background-color: #23ad5c;
+      //   }
+    }
+  }
+}
+
+@media screen and (min-width: 680px) {
+  .container {
+    max-width: 500px;
+  }
+}
