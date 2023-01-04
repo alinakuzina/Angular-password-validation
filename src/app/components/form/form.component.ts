@@ -38,20 +38,15 @@ export class FormComponent implements OnInit {
 
     this.isTyped = this.form.value.password ? true : false;
     this.isCheckClicked = false;
-
+    this.hasEmptySpaces = false;
     //Check to empty spaces in string
     if (this.form.value.password?.search(EmptySpaceRegExp) !== -1) {
       this.strength = 'short';
       this.isValidPassword = false;
       this.hasEmptySpaces = true;
     }
-    if (this.form.value.password?.search(EmptySpaceRegExp) === -1) {
-      this.isValidPassword = false;
-      this.hasEmptySpaces = false;
-    }
-
     //Password strength validation
-    if (!this.form.value.password) {
+    else if (!this.form.value.password) {
       this.strength = '';
       this.isValidPassword = false;
     } else if (this.form.value.password.length < 8) {
