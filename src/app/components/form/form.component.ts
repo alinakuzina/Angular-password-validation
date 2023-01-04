@@ -12,6 +12,7 @@ export class FormComponent implements OnInit {
   public strength: string = '';
   public isValidPassword: boolean = false;
   public isCheckClicked: boolean = false;
+  public hasEmptySpaces: boolean = false;
 
   form = new FormGroup({
     password: new FormControl<string>(''),
@@ -22,6 +23,7 @@ export class FormComponent implements OnInit {
   }
 
   validatePassword() {
+    const EmptySpaceRegExp: RegExp = /[/^\s+$/]/;
     const onlyNumberRegExp: RegExp = /^[0-9]+$/;
     const onlyLetterRegExp: RegExp = /^[a-z]+$/i;
     const onlySymbolRegExp: RegExp =
@@ -36,6 +38,19 @@ export class FormComponent implements OnInit {
 
     this.isTyped = this.form.value.password ? true : false;
     this.isCheckClicked = false;
+
+    //Check to empty spaces in string
+    if (this.form.value.password?.search(EmptySpaceRegExp) !== -1) {
+      this.strength = 'short';
+      this.isValidPassword = false;
+      this.hasEmptySpaces = true;
+    }
+    if (this.form.value.password?.search(EmptySpaceRegExp) === -1) {
+      this.isValidPassword = false;
+      this.hasEmptySpaces = false;
+    }
+
+    //Password strength validation
     if (!this.form.value.password) {
       this.strength = '';
       this.isValidPassword = false;
