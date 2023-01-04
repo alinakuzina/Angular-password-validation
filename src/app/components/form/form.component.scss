@@ -68,13 +68,6 @@
       }
     }
 
-    .form_input:-webkit-autofill,
-    form_input:-webkit-autofill:hover,
-    form_input:-webkit-autofill:focus,
-    form_input:-webkit-autofill:active {
-      box-shadow: 0 0 0 30px var(--white) inset;
-    }
-
     .form_input_label {
       color: var(--gray);
       font-size: 1.2rem;
