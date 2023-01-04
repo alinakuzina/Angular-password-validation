@@ -54,13 +54,11 @@ export class FormComponent implements OnInit {
       )
     ) {
       this.isValidPassword = true;
-      console.log(this.isValidPassword);
       this.strength = 'strong';
     }
   }
 
   submit() {
-    console.log(this.form.value);
     this.isCheckClicked = true;
   }
 
