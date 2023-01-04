@@ -70,7 +70,7 @@
           <span *ngIf="strength === 'medium'">medium.</span>
           <span *ngIf="strength === 'strong'">strong.</span>
         </div>
-        <div class="strenth" *ngIf="isCheckClicked && !isValidPassword">
+        <div class="strength_rules" *ngIf="isCheckClicked && !isValidPassword">
           <span>Password must contain the following:</span>
           <ul>
             <li>minimum 8 characters</li>
@@ -84,14 +84,14 @@
     <button
       *ngIf="!isValidPassword || !isCheckClicked"
       type="submit"
-      class="btn-submit"
+      class="btn_submit"
     >
       Check
     </button>
     <button
       type="button"
       *ngIf="isValidPassword && isCheckClicked"
-      class="btn-submit"
+      class="btn_submit"
       (click)="newCheck()"
     >
       Try again
