@@ -1,0 +1,100 @@
+<div class="container">
+  <h1 class="header">Password Validation</h1>
+  <form [formGroup]="form" class="form" (ngSubmit)="submit()">
+    <div class="group">
+      <input
+        formControlName="password"
+        [type]="show ? 'text' : 'password'"
+        class="form_input"
+        (input)="validatePassword()"
+      />
+      <label [class]="isTyped ? 'form_input_label shrink' : 'form_input_label'">
+        Password
+      </label>
+      <button type="button" class="btn_icon" (click)="switchShowPassword()">
+        <img
+          class="icon"
+          [src]="
+            show
+              ? '../../../assets/icon-eye-close.svg'
+              : '../../../assets/icon-eye-open.svg'
+          "
+        />
+      </button>
+      <div class="passwordStrength">
+        <span
+          [class]="
+            !strength
+              ? 'first_line'
+              : strength === 'short' || strength === 'easy'
+              ? 'first_line red_line'
+              : strength === 'medium'
+              ? 'first_line yellow_line'
+              : 'first_line green_line'
+          "
+        ></span>
+        <span
+          [class]="
+            !strength || strength === 'easy'
+              ? 'second_line'
+              : strength === 'short'
+              ? 'second_line red_line'
+              : strength === 'medium'
+              ? 'second_line yellow_line'
+              : 'second_line green_line'
+          "
+        ></span>
+        <span
+          [class]="
+            !strength || strength === 'easy' || strength === 'medium'
+              ? 'third_line'
+              : strength === 'short'
+              ? 'third_line red_line'
+              : 'third_line green_line'
+          "
+        ></span>
+      </div>
+      <div class="check_text_container">
+        <div
+          [class]="
+            isValidPassword
+              ? 'strength_text green_border'
+              : 'strength_text red_border'
+          "
+          *ngIf="isCheckClicked"
+        >
+          Password strength:
+          <span *ngIf="!strength">there are no password.</span>
+          <span *ngIf="strength === 'short'">it is too short.</span>
+          <span *ngIf="strength === 'easy'">easy.</span>
+          <span *ngIf="strength === 'medium'">medium.</span>
+          <span *ngIf="strength === 'strong'">strong.</span>
+        </div>
+        <div class="strength_rules" *ngIf="isCheckClicked && !isValidPassword">
+          <span>Password must contain the following:</span>
+          <ul>
+            <li>minimum 8 characters</li>
+            <li>a number</li>
+            <li>a letter</li>
+            <li>a symbol</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <button
+      *ngIf="!isValidPassword || !isCheckClicked"
+      type="submit"
+      class="btn-submit"
+    >
+      Check
+    </button>
+    <button
+      type="button"
+      *ngIf="isValidPassword && isCheckClicked"
+      class="btn-submit"
+      (click)="newCheck()"
+    >
+      Try again
+    </button>
+  </form>
+</div>
