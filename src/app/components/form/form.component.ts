@@ -22,6 +22,18 @@ export class FormComponent implements OnInit {
   }
 
   validatePassword() {
+    const onlyNumberRegExp: RegExp = /^[0-9]+$/;
+    const onlyLetterRegExp: RegExp = /^[a-z]+$/i;
+    const onlySymbolRegExp: RegExp =
+      /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$/i;
+    const LetterNumberRegExp: RegExp = /^[A-Z0-9]*$/i;
+    const LetterSymbolRegExp: RegExp =
+      /^[A-Z!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/i;
+    const NumberSymbolRegExp: RegExp =
+      /^[0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
+    const NumberLetterSymbolRegExp: RegExp =
+      /^[A-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/i;
+
     this.isTyped = this.form.value.password ? true : false;
     this.isCheckClicked = false;
     if (!this.form.value.password) {
@@ -31,28 +43,20 @@ export class FormComponent implements OnInit {
       this.strength = 'short';
       this.isValidPassword = false;
     } else if (
-      /^[0-9]+$/.test(this.form.value.password) ||
-      /^[a-z]+$/i.test(this.form.value.password) ||
-      /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$/i.test(this.form.value.password)
+      onlyNumberRegExp.test(this.form.value.password) ||
+      onlyLetterRegExp.test(this.form.value.password) ||
+      onlySymbolRegExp.test(this.form.value.password)
     ) {
       this.strength = 'easy';
       this.isValidPassword = false;
     } else if (
-      /^[A-Z0-9]*$/i.test(this.form.value.password) ||
-      /^[A-Z!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/i.test(
-        this.form.value.password
-      ) ||
-      /^[0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/.test(
-        this.form.value.password
-      )
+      LetterNumberRegExp.test(this.form.value.password) ||
+      LetterSymbolRegExp.test(this.form.value.password) ||
+      NumberSymbolRegExp.test(this.form.value.password)
     ) {
       this.isValidPassword = false;
       this.strength = 'medium';
-    } else if (
-      /^[A-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/i.test(
-        this.form.value.password
-      )
-    ) {
+    } else if (NumberLetterSymbolRegExp.test(this.form.value.password)) {
       this.isValidPassword = true;
       this.strength = 'strong';
     }
