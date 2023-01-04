@@ -65,10 +65,13 @@
         >
           Password strength:
           <span *ngIf="!strength">there are no password.</span>
-          <span *ngIf="strength === 'short'">password is too short.</span>
-          <span *ngIf="strength === 'easy'">easy.</span>
-          <span *ngIf="strength === 'medium'">medium.</span>
-          <span *ngIf="strength === 'strong'">strong.</span>
+          <span *ngIf="strength === 'short' && !hasEmptySpaces"
+            >password is too short.</span
+          >
+          <span *ngIf="strength === 'easy' && !hasEmptySpaces">easy.</span>
+          <span *ngIf="strength === 'medium' && !hasEmptySpaces">medium.</span>
+          <span *ngIf="strength === 'strong' && !hasEmptySpaces">strong.</span>
+          <span *ngIf="hasEmptySpaces">empty spaces are not allowed.</span>
         </div>
         <div class="strength_rules" *ngIf="isCheckClicked && !isValidPassword">
           <span>Password must contain the following:</span>
