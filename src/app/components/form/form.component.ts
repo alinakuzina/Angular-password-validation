@@ -6,7 +6,7 @@ import { OnInit } from '@angular/core';
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
-export class ContainerComponent implements OnInit {
+export class FormComponent implements OnInit {
   public show: boolean = false;
   public isTyped: boolean = false;
   public strength: string = '';

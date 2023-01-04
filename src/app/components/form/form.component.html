@@ -65,12 +65,12 @@
         >
           Password strength:
           <span *ngIf="!strength">there are no password.</span>
-          <span *ngIf="strength === 'short'">it is too short.</span>
+          <span *ngIf="strength === 'short'">password is too short.</span>
           <span *ngIf="strength === 'easy'">easy.</span>
           <span *ngIf="strength === 'medium'">medium.</span>
           <span *ngIf="strength === 'strong'">strong.</span>
         </div>
-        <div class="strength_rules" *ngIf="isCheckClicked && !isValidPassword">
+        <div class="strenth" *ngIf="isCheckClicked && !isValidPassword">
           <span>Password must contain the following:</span>
           <ul>
             <li>minimum 8 characters</li>
